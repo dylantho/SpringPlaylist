@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add or Edit Song</title>
+
+<style>
+body {
+	background-color: #121111;
+	font-family: Verdana, sans-serif;
+	color: white;
+}
+a {text-decoration: none;}
+a:link {color: white;}
+a:visited {color: white;}
+a:hover {color: #6df29c;}
+input {
+  padding: 8px 14px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 20%
+}
+input[type=submit]:hover {
+  background-color: #6df29c;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Add or Edit Song</h2>
+	<hr>
+	<br/>
+
+<form th:object="${newSong}" th:action="@{/update/{id}(id=${newSong.id})}" method=POST>
+Song Name  :   <input autocomplete="off" name="name" size="20" th:field="*{name}"><br />
+Artist  :  <input autocomplete="off" name="artist" size="20" th:field="*{artist}"><br />
+Album  :  <input autocomplete="off" name="album" size="20" th:field="*{album}"><br />
+Length  :  <input autocomplete="off" style="width: 5%;" name="length" size="20" th:field="*{length}"><br />
+
+<br />
+
+<input style="border-radius: 12px; width: 5%;" name="Submit" type="submit" value="Confirm" />
+</form>
+
+<br />
+
+<a href="../viewAll">View Song Library</a>
+
+</body>
+</html>

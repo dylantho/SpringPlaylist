@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<title>Song Library</title>
+<style>
+body {
+	background-color: #121111;
+	font-family: Verdana, sans-serif;
+	color: white;
+}
+
+table {
+	border-collapse: collapse;
+	width: 65%;
+}
+
+td, th {padding: 8px;}
+
+tr {
+	background-color: #2A2A2A;
+	color: white;
+}
+
+tr:hover {background-color: #4f4f4f;}
+
+th {
+	text-align: left;
+	background-color: #1f1e1e;
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+a {text-decoration: none;}
+a:link {color: white;}
+a:visited {color: white;}
+a:hover {color: #6df29c;}
+
+</style>
+</head>
+<body>
+	<h2>Song Library</h2>
+	<hr>
+	<br/>
+	<form>
+		<table>
+			<tr>
+				<th>Title</th>
+				<th>Artist</th>
+				<th>Album</th>
+				<th>Length</th>
+				<th></th>
+			</tr>
+			<tr th:each="currentSong: ${songs}">
+
+				<td th:text="${currentSong.name}" />
+				<td th:text="${currentSong.artist}" />
+				<td th:text="${currentSong.album}" />
+				<td th:text="${currentSong.length}" />
+
+				<td><a th:href="@{/edit/{id}(id=${currentSong.id})}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					th:href="@{/delete/{id}(id=${currentSong.id})}">Delete</a></td>
+
+			</tr>
+		</table>
+	</form>
+	<br />
+	<a href="../inputSong">Add Song</a>
+
+</body>
+</html>
+
