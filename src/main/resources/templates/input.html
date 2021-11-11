@@ -28,6 +28,62 @@ input[type=submit]:hover {
 }
 </style>
 
+<script>
+
+		// Must require song and artist names
+        function checkForEmpty() {
+          if (document.getElementById("songname").value == "" || document.getElementById("artistname").value == "") { 
+              if(document.getElementById("songname").value == ""){
+            	  alert("Song name is required.");
+            	  document.getElementById("songname").style.border = "2px solid red";
+              }
+              else{
+	        	  document.getElementById("songname").style.border = "1px solid";
+	          }
+              if(document.getElementById("artistname").value == ""){
+            	  alert("Artist name is required.");
+            	  document.getElementById("artistname").style.border = "2px solid red";
+              }
+              else{
+	        	  document.getElementById("artistname").style.border = "1px solid";
+	          }
+              return false;
+           }
+          if(document.getElementById("songname").value != ""){
+        	  document.getElementById("songname").style.border = "1px solid";
+          }
+          if(document.getElementById("artistname").value != ""){
+        	  document.getElementById("artistname").style.border = "1px solid";
+          }
+          
+        }
+		// Require specific length formatting
+		function checkSongLength(){
+			let re = /^[1-9]\d:\d\d$|^\d:\d\d$|^0:\d\d$/;
+	          if(re.test(document.getElementById("songlength").value) == false){
+					alert("Song length is required and must be in format: 11:11 or 1:11 or 0:11");
+					document.getElementById("songlength").style.border = "2px solid red";
+					return false;
+				}
+	          else{
+	        	  document.getElementById("songlength").style.border = "1px solid";
+	          }
+		}
+		function validate(){
+			let a = checkForEmpty();
+			let b = checkSongLength();
+			if (a == false || b == false){
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+        
+        
+</script>
+
 </head>
 <body>
 
@@ -35,11 +91,11 @@ input[type=submit]:hover {
 	<hr>
 	<br/>
 
-<form th:object="${newSong}" th:action="@{/update/{id}(id=${newSong.id})}" method=POST>
-Song Name  :   <input autocomplete="off" name="name" size="20" th:field="*{name}"><br />
-Artist  :  <input autocomplete="off" name="artist" size="20" th:field="*{artist}"><br />
-Album  :  <input autocomplete="off" name="album" size="20" th:field="*{album}"><br />
-Length  :  <input autocomplete="off" style="width: 5%;" name="length" size="20" th:field="*{length}"><br />
+<form th:object="${newSong}" th:action="@{/update/{id}(id=${newSong.id})}" method=POST onsubmit="return validate()">
+Song Name  :   <input autocomplete="off" name="name" size="20" th:field="*{name}" id="songname"><br />
+Artist  :  <input autocomplete="off" name="artist" size="20" th:field="*{artist}" id="artistname"><br />
+Album  :  <input autocomplete="off" name="album" size="20" th:field="*{album}" id="albumname"><br />
+Length  :  <input autocomplete="off" style="width: 5%;" name="length" size="20" th:field="*{length}" id="songlength"><br />
 
 <br />
 
